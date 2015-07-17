@@ -1,0 +1,37 @@
+#include "hash.h"
+
+using namespace std;
+
+int main(int argc, char** argv){
+
+	hash object;
+	string name = "";
+	object.addItem("Paul","locha");
+	object.addItem("Kim","iced mocha");
+	object.addItem("Emma"," smoothy");
+	object.addItem("Annie","hot chocolate");
+	object.addItem("Sarah","passion tea");
+	object.addItem("Pepper","mocha");
+	object.addItem("Mike","tea");
+	object.addItem("Steve","apple cider");
+	object.addItem("Bill","root beer");
+	object.addItem("Marie","skinny latte");
+	object.addItem("Susan","water");
+	object.addItem("Joe","green tea");
+
+	//object.printTable();
+	//object.printItemsInIndex(9);
+
+	while(name != "exit"){
+
+		cout<<"Search for ";
+		cin>>name;
+		if(name != "exit"){
+
+			object.findDrink(name);
+		}
+	}
+
+	return 0;
+
+}

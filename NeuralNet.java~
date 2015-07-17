@@ -1,0 +1,13 @@
+import java.io.*;
+import java.util.*;
+
+public class NeuralNet{
+	public static void main(String args[]){
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("enter double");
+		String temp = br.readLine();
+		double input = Double.parseDouble(temp);
+		double a = 1 / (1 + Math.exp(-input));
+		System.out.println(a);
+	}
+}

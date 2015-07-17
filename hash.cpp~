@@ -1,0 +1,144 @@
+#include "hash.h"
+
+using namespace std;
+
+hash::hash(){
+
+	for(int i=0;i<tableSize;i++){
+
+		HashTable[i] = new item;
+		HashTable[i]->name = "empty";
+		HashTable[i]->drink="empty";
+		HashTable[i]->next=NULL;
+	}
+}
+
+void hash::addItem(string name,string drink){
+
+	int index = Hash(name);
+
+	if(HashTable[index]->name == "empty"){
+		
+		HashTable[index]->name = name;
+		HashTable[index]->drink  = drink;
+	
+	}
+	else{
+
+		item* Ptr = HashTable[index];
+		item* newPtr = new item;
+		newPtr->name = name;
+		newPtr->drink = drink;
+		newPtr->next = NULL;
+		while(Ptr->next != NULL){
+			Ptr=Ptr->next;
+		}
+		Ptr->next=newPtr;
+
+	}
+}
+
+int hash::numberOfItemsInIndex(int index){
+
+	int count=0;
+	
+	if(HashTable[index]->name == "empty"){
+
+		return count;
+	}
+	else{
+
+		count++;
+		item* Ptr = HashTable[index];
+
+		while(Ptr->next != NULL){
+
+			count++;
+			Ptr = Ptr->next;
+		}
+		return count;
+	}
+
+}
+
+void hash::printTable(){
+
+	int number;
+	for(int i=0;i<tableSize;i++){
+
+		number = numberOfItemsInIndex(i);
+		cout<<"-------------------\n";
+		cout<< "index = "<< i <<endl;
+		cout<< HashTable[i]->name<<endl;
+		cout<< HashTable[i]->drink<<endl;
+		cout<< "# of items = "<<number<<endl;
+	}
+}
+
+void hash::printItemsInIndex(int index){
+
+	item* Ptr = HashTable[index];
+
+	if(Ptr->name == "empty"){
+
+		cout<<" index = "<< index << "is empty"<<endl;
+	}
+	else{
+
+		cout<<"index "<<index<<" contains the following items"<<endl;
+
+		while(Ptr != NULL){
+
+			cout<<"--------------------\n";
+			cout<<Ptr->name<<endl;
+			cout<<Ptr->drink<<endl;
+			cout<<"--------------------\n";
+			Ptr=Ptr->next;
+
+		}
+	}
+}
+
+void hash::findDrink(string name){
+
+	int index = Hash(name); //discovering the bucket
+	bool foundName = false;
+	string drink;
+
+	item* Ptr = HashTable[index];
+	while(Ptr != NULL){
+
+		if(Ptr->name == name){
+
+			foundName = true;
+			drink = Ptr->drink;
+		}
+		Ptr=Ptr->next;
+	}
+	if(foundName == true){
+
+		cout<<"Favourite drink = "<<drink<<endl;
+	}
+	else{
+
+		cout<<name<<"'s info was not found in the hashtable \n";
+	}
+
+}
+int hash::Hash(string key){
+
+	int hash = 0;
+	int index;
+
+	for(int i=0;i<key.length();i++){
+
+		hash=hash+(int)key[i];		//adding up the ascii values of all characters in the string
+	}
+
+	index = hash % tableSize;
+
+
+
+
+	return index;
+}
