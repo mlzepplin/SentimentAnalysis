@@ -1,0 +1,6 @@
+Sentiment Analysis using machine learning (three-layered Nueral Network) and some basic 
+Natural Language Processing techniques.
+
+External jars used:-
+Jama matrix library
+Stanford-Pos Tagger (Parts of speech tagging)
